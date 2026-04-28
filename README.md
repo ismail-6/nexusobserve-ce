@@ -1,8 +1,8 @@
 # NexusObserve
 
-NexusObserve is a self-hosted observability and operations platform. It ingests OpenTelemetry telemetry, models infrastructure and service state, evaluates alert rules, and exposes a programmatic interface for AI-driven investigation.
+NexusObserve is a self-hosted observability and operations platform built for financial services institutions and technology companies running transactional and custom in-house applications. It ingests OpenTelemetry telemetry, models infrastructure and service state, evaluates alert rules, and exposes a programmatic interface for AI-driven investigation.
 
-The platform consolidates responsibilities typically split across an observability backend, an infrastructure monitoring system, and an operational control plane. It is designed for teams that prefer to run their own data plane rather than ship telemetry to a third-party SaaS.
+The platform consolidates responsibilities typically split across an observability backend, an infrastructure monitoring system, and an operational control plane. It is designed for organizations that operate business-critical workloads under regulatory or latency constraints that make third-party SaaS telemetry unsuitable, and that maintain custom applications requiring deep, language-agnostic instrumentation.
 
 ---
 
@@ -93,14 +93,48 @@ The control plane and telemetry stores can be co-located on a single host or sca
 
 ---
 
-## Use Cases
+## Workload Focus
 
-NexusObserve is intended for:
+NexusObserve is built around the operational requirements of financial services institutions and technology companies running transactional and custom in-house applications. These workloads share a common profile: business-critical latency budgets, regulated data handling, deep custom instrumentation, and operational practices that pre-date modern OpenTelemetry tooling.
 
-- **Engineering teams** seeking unified metrics, logs, traces, APM, and RUM under one console without per-signal vendor sprawl.
-- **Platform and SRE teams** running diverse fleets of hosts, containers, and Kubernetes workloads who need monitoring coverage intelligence and operational control.
-- **Regulated environments** where data residency, deterministic cost, and self-hosting are non-negotiable.
-- **Organizations adopting AI-assisted operations** that need a programmatic surface for agents to investigate incidents and answer operational questions.
+### Financial Services
+
+Banks, trading firms, payment processors, exchanges, asset managers, and fintech platforms operate transactional systems where every request carries measurable business impact. NexusObserve targets these environments with:
+
+- **End-to-end transaction tracing** — Distributed traces span order capture, risk checks, matching, settlement, and downstream messaging, so a single transaction can be reconstructed across every service it touched.
+- **High-percentile latency tracking** — Latency distributions are computed at p50, p95, p99, p99.9, and p99.99, matching the tail-latency budgets that govern execution and settlement workflows.
+- **Regulatory-grade data handling** — Self-hosting keeps regulated content (PII, PCI, MNPI, transaction data) inside the institution's perimeter. The log pipeline supports redaction and rule-based dropping before persistence.
+- **Audit trails** — Operator commands, alert acknowledgements, and incident state changes are recorded with attribution.
+- **Gateway-style operational modeling** — Gateways, probes, samplers, dataviews, and commands match the operational model used in trading floors and middle-office monitoring estates, so existing operational practices carry over.
+- **Deterministic cost** — Resource consumption is bounded by deployed infrastructure rather than per-event vendor pricing, making the platform viable for high-throughput trading and payment estates where event volume scales nonlinearly.
+
+### Technology Companies
+
+SaaS platforms, internal product engineering teams, and infrastructure organizations running custom backends benefit from:
+
+- **Language-agnostic instrumentation** — OTLP-native ingestion works with every officially supported OpenTelemetry SDK and any language with a community SDK or manual exporter. Custom services are instrumented identically to off-the-shelf components.
+- **Service ownership signals** — The service catalog and topology graph make ownership and dependency relationships explicit without requiring a parallel registry.
+- **Custom metric exposition** — Application-specific metrics (queue depth, business KPIs, internal SLOs) can be emitted via OTLP or Prometheus and treated as first-class telemetry alongside system metrics.
+- **RUM for product engineering** — Browser session capture, error tracking, and replay support frontend and product teams investigating user-impacting regressions.
+- **AI-assisted investigation** — The programmatic interface lets coding assistants and ops agents pull production context directly into developer workflows.
+
+### Transactional Application Monitoring
+
+For applications where each request represents a discrete business transaction — orders, payments, trades, bookings, claims, settlements — NexusObserve provides:
+
+- **Span-level transaction reconstruction** — A trace ID corresponds to a complete business transaction, with span attributes carrying transaction identifiers, customer or counterparty context, and business outcome.
+- **Error attribution** — Span events and exception records preserve the exact stage where a transaction failed, including upstream and downstream service context.
+- **Volume and outcome rules** — Alert rules can fire on transaction volume drops, error-rate spikes, or outcome distributions in addition to traditional system metrics.
+- **Forensic context** — RUM session replay, log retention, and trace storage together support post-incident reconstruction without requiring a separate forensic pipeline.
+
+### Custom Application Monitoring
+
+In-house applications — bespoke trading systems, internal platforms, regulatory reporting engines, batch processors, settlement engines — typically lack the ready-made integrations that off-the-shelf observability tools rely on. NexusObserve treats custom applications as the primary case rather than the exception:
+
+- **OTLP-first** — No proprietary agent or SDK is required; instrumentation is added through standard OpenTelemetry libraries.
+- **Custom field-level enrichment** — Resource attributes and span attributes carry application-specific dimensions (account ID, desk, region, environment, version, tenant) used for filtering, aggregation, and rule evaluation.
+- **Process and sampler probes** — Where direct instrumentation is impractical (legacy binaries, vendor processes, batch jobs), agent-driven probes and samplers surface state into the same telemetry pipeline.
+- **Server-side log normalization** — Unstructured or partially structured logs from legacy systems are normalized server-side, so bespoke log formats become queryable without modifying the source application.
 
 ---
 
