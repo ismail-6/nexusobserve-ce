@@ -1,38 +1,61 @@
-# NexusObserve CE
+# NexusObserve
 
-NexusObserve CE is a self-hosted operational intelligence platform that brings observability, infrastructure monitoring, real-time operations, alerting, service topology, and AI-agent access to live telemetry into a single control plane.
+NexusObserve is a self-hosted observability and operations platform. It ingests OpenTelemetry telemetry, models infrastructure and service state, evaluates alert rules, and exposes a programmatic interface for AI-driven investigation.
 
-It combines OpenTelemetry-native ingestion with operational modeling concepts familiar to teams running mission-critical systems, and exposes that context to AI assistants so they can investigate incidents, query telemetry, and assemble context without humans bouncing between dashboards.
+---
 
-## What It Does
+## Capabilities
 
-- **Telemetry ingestion** — Metrics, logs, and traces over OTLP (HTTP and gRPC), Prometheus scrape, and a first-party agent for hosts, processes, containers, and Kubernetes workloads.
-- **Observability surfaces** — Dashboards, log search, metric exploration, distributed tracing, service catalog, and topology maps derived from trace relationships.
-- **APM and RUM** — Trace-derived service request, latency, error, and dependency metrics, plus browser real-user monitoring with sessions, errors, and session replay.
-- **Alerting and incidents** — Rules, alert history, snoozing, incident workflows, and notification routing across Slack, Discord, email, PagerDuty, Telegram, Microsoft Teams, Google Chat, ServiceNow, HTTP, and generic webhooks.
-- **Operational control** — Gateway, probe, sampler, dataview, rule, and command primitives for real-time operations on production estates.
-- **AI-native investigation** — A standards-based interface that lets coding and ops agents query metrics, search logs, pull traces, review active alerts, and gather incident context directly.
+### Telemetry Ingestion
 
-## Why NexusObserve
+- OTLP metrics, logs, and traces over HTTP and gRPC.
+- Prometheus scrape for existing exporters.
+- First-party agent collecting host, process, container, and Kubernetes signals.
 
-NexusObserve is intended as a self-hosted alternative to the patchwork of tools teams typically stitch together — observability backends, infrastructure monitors, log intelligence platforms, and operational control planes — with predictable cost, local control, and AI-first investigation built in from day one.
+### Observability
 
-It is designed to combine:
+- Metric exploration, log search, and distributed trace inspection.
+- Service catalog and topology graph derived from trace relationships.
+- Configurable dashboards.
 
-- OTLP-native metrics, logs, traces, and RUM.
-- First-party agents that understand hosts, processes, containers, Kubernetes, databases, and service topology.
-- Operational modeling through gateways, probes, entities, samplers, dataviews, rules, active times, and commands.
-- Monitoring coverage intelligence that shows what exists, what is monitored, and what is missing.
-- AI-native investigation through evidence-linked explanations and incident context APIs.
+### Application and Real-User Monitoring
+
+- Trace-derived APM metrics: request rate, latency, error rate, and dependency mapping.
+- Browser RUM with session capture, error tracking, and session replay.
+
+### Alerting and Incidents
+
+- Rule evaluation with snoozing, alert history, and incident lifecycle management.
+- Notification routing to Slack, Discord, email, PagerDuty, Telegram, Microsoft Teams, Google Chat, ServiceNow, HTTP, and generic webhooks.
+
+### Operational Modeling
+
+- Gateway, probe, sampler, dataview, rule, active-time, and command primitives for modeling production estates.
+
+### Programmatic Access
+
+- Standards-based interface allowing AI agents to query metrics, search logs, retrieve traces, inspect alerts, and assemble incident context.
+
+---
+
+## Positioning
+
+NexusObserve targets teams that need observability, infrastructure monitoring, and operational control consolidated under a single self-hosted deployment, with deterministic cost and full data residency control.
+
+---
 
 ## Status
 
-NexusObserve CE is under active development. Treat it as ready for controlled dogfooding rather than a drop-in replacement for established commercial observability or operations platforms.
+Active development. Suitable for evaluation and internal use. Not yet positioned as a drop-in replacement for established commercial observability or operations platforms.
+
+---
 
 ## License
 
 All rights reserved. See [LICENSE](LICENSE).
 
+---
+
 ## Contact
 
-For access, partnerships, or evaluation requests, please reach out to the maintainer.
+For access, evaluation, or partnership inquiries, contact the maintainer.
